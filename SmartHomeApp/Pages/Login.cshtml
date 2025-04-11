@@ -1,0 +1,44 @@
+﻿@page
+@model SmartHomeApp.Pages.LoginModel
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2>Inloggen</h2>
+    </div>
+
+    <form method="post" class="mx-auto" style="max-width: 400px;">
+
+        @* Toon foutmeldingen bovenaan *@
+        <div asp-validation-summary="All" class="alert alert-danger"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="email" class="form-label">E-mail</label>
+            <input asp-for="email" class="form-control" placeholder="Voer je e-mailadres in" />
+            <span asp-validation-for="email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="password" class="form-label">Wachtwoord</label>
+            <input asp-for="password" class="form-control" placeholder="Voer je wachtwoord in" type="password" />
+            <span asp-validation-for="password" class="text-danger"></span>
+        </div>
+
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-warning btn-lg">
+                <i class="fas fa-lock"></i> Inloggen
+            </button>
+        </div>
+
+        <div class="text-center mt-4">
+            <p>
+                Heb je nog geen account?
+                <a href="/Authentication/Register" class="text-decoration-none text-warning">Registreer hier</a>.
+            </p>
+        </div>
+
+    </form>
+</div>

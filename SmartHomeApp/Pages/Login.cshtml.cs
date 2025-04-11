@@ -2,40 +2,55 @@ using Core_Domain;
 using Core_Domain.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Routing.Tree;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace SmartHomeApp.Pages
 {
-    public class RegisterModel : PageModel
+    public class LoginModel : PageModel
     {
+
         private readonly IUserservice _userservice;
 
-        public RegisterModel(IUserservice userservice)
+        public LoginModel(IUserservice userservice)
         {
             _userservice = userservice;
         }
-        [BindProperty]
 
-        public User newuser { get; set; }
+        [BindProperty]
+        public string email {  get; set; }  
+        
+        [BindProperty]
+        public string password {  get; set; }
+
+
         public void OnGet()
         {
+            
         }
-        public async Task<ActionResult> OnPostAsync()
+
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+               
                 return Page();
             }
             try
             {
-                 _userservice.Register(newuser);
+                User user = new User(email, password);
+               
+                _userservice.Login(user);
                 return RedirectToPage("/Index");
-
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, $"An error occurred: {ex.Message}");
+                ModelState.AddModelError(string.Empty, $"Er is een fout opgetreden: {ex.Message}");
                 return Page();
             }
+
+
+
         }
     }
 }

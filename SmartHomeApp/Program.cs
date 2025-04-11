@@ -1,16 +1,17 @@
 
-using Infrastructure.Data.Data;
 using Infrastructure.Data;
 using Core_Domain;
+using Core_Domain.Interface;
+using Infrastructure.Data.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-var connectionstring = builder.Configuration.GetConnectionString("Defaultconnection");
-builder.Services.AddSingleton(new UserRepository(connectionstring));
-builder.Services.AddSingleton(new UserService(connectionstring)); 
+
+builder.Services.AddScoped<IUserservice,UserService>();
+builder.Services.AddScoped<IUserRepository,UserRepository>(); 
 
 
 var app = builder.Build();
