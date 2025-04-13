@@ -21,30 +21,42 @@ namespace Core_Domain
             _userRepository = userRepository;
         }
 
-        public bool Register(User user)
+        public AuthResult Register(User user)
         {
-           
+            if (_userRepository.EmailExists(user.Email))
+            {
+                return AuthResult.FailedResult(false, "Dit email adres bestaat er al!");
+            }
+
            _userRepository.Register(
                 user.Firstname,
                 user.Lastname,
                 user.DateOfBirth,
                 user.Email,
                 user.Password);
-            return true;
+
+            return AuthResult.SuccessResult(true,"Jij bent succevol geregistreerd!");
                 
 
         }
 
-        public bool Login(User user)
+        public AuthResult Login(User user)
         { 
            var loggedinuser=_userRepository.Login(user.Email, user.Password);
 
             if (loggedinuser == null)
             {
-                throw new Exception("E-mailadres of wachtwoord is onjuist.");
+                return AuthResult.FailedResult(false,"Emailadress of wachtwoord is onjuist!");
             }
-            return true;
+            return AuthResult.SuccessResult(true,"Jij bent succesvol ingelogd!");
              
+        }
+
+        public bool EmailExists(User user)
+        { 
+           return _userRepository.EmailExists(user.Email);
+           
+        
         }
     }
 }

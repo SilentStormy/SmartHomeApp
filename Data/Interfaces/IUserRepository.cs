@@ -11,5 +11,6 @@ namespace Infrastructure.Data.Interfaces
     {
         void Register(string firstname, string lastname, DateTime dateofbirth, string email, string password);
         UserDTO Login(string email, string password);
+        bool EmailExists(string email);
     }
 }

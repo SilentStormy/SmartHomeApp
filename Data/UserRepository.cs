@@ -57,5 +57,21 @@ namespace Infrastructure.Data
             }
             return user;
         }
+
+        public bool EmailExists(string email)
+        { 
+           
+            using SqliteConnection conn =new(_connectionstring);
+            conn.Open();
+            using SqliteCommand cmd =conn.CreateCommand();
+            cmd.CommandText = "SELECT 1 FROM USER WHERE Email=@Email";
+            cmd.Parameters.AddWithValue("@Email", email);
+            var result = cmd.ExecuteScalar();
+
+            return result != null;
+            
+        }
+
+     
     }
 }

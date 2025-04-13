@@ -40,7 +40,8 @@ namespace SmartHomeApp.Pages
             {
                 User user = new User(email, password);
                
-                _userservice.Login(user);
+               var result= _userservice.Login(user);
+                TempData["SuccessMessage"]=result.Message;
                 return RedirectToPage("/Index");
             }
             catch (Exception ex)

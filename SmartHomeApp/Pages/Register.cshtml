@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Registreer";
 }
+
 <div class="container mt-4">
+ 
     <h1 class="text-center mb-4" style="color: #343a40;">Registreren</h1>
     @if (!ViewData.ModelState.IsValid)
     {
@@ -16,30 +18,45 @@
             </ul>
         </div>
     }
+   
 
     <form method="post" class="p-4" style="border: 1px solid #ddd; border-radius: 8px; max-width: 500px; margin: 0 auto;">
+
         <div class="form-group mb-3">
-            <label for="Voornaam" class="form-label">Voornaam</label>
-            <input type="text" id="Voornaam" name="newuser.firstname" class="form-control" placeholder="Vul je voornaam in" required />
+            <label asp-for="newuser.Firstname" class="form-label"></label>
+            <input asp-for="newuser.Firstname" class="form-control" placeholder="Vul je voornaam in" />
+            <span asp-validation-for="newuser.Firstname" class="text-danger"></span>
         </div>
+
         <div class="form-group mb-3">
-            <label for="Achternaam" class="form-label">Achternaam</label>
-            <input type="text" id="Achternaam" name="newuser.lastname" class="form-control" placeholder="Vul je achternaam in" required />
+            <label asp-for="newuser.Lastname" class="form-label"></label>
+            <input asp-for="newuser.Lastname" class="form-control" placeholder="Vul je achternaam in" />
+            <span asp-validation-for="newuser.Lastname" class="text-danger"></span>
         </div>
+
         <div class="form-group mb-3">
-            <label for="Email" class="form-label">E-mail</label>
-            <input type="email" id="Email" name="newuser.email" class="form-control" placeholder="Vul je e-mailadres in" required />
+            <label asp-for="newuser.Email" class="form-label"></label>
+            <input asp-for="newuser.Email" class="form-control" placeholder="Vul je e-mailadres in" />
+            <span asp-validation-for="newuser.Email" class="text-danger"></span>
         </div>
+
         <div class="form-group mb-3">
-            <label for="Password" class="form-label">Wachtwoord</label>
-            <input type="password" id="Password" name="newuser.password" class="form-control" placeholder="Maak een wachtwoord aan" required />
+            <label asp-for="newuser.Password" class="form-label"></label>
+            <input asp-for="newuser.Password" class="form-control" type="password" placeholder="Maak een wachtwoord aan" />
+            <span asp-validation-for="newuser.Password" class="text-danger"></span>
         </div>
-         <button type="submit" class="btn" style="background-color: lightblue; color: white; width: 100%;">Registreer</button>
-       
-        <p class="text-center">
-            Heb je al een account? <a href="/Authentication/Login" style="color: lightblue;">Log in</a>.
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-block">Registreer</button>
+        </div>
+
+        <p class="text-center mt-3">
+            Heb je al een account?
+            <a href="/Authentication/Login" class="text-decoration-none" style="color: lightblue;">Log in</a>
         </p>
     </form>
 </div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

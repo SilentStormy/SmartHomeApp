@@ -8,7 +8,8 @@ namespace Core_Domain.Interface
 {
     public interface IUserservice
     {
-        bool Register(User user);
-        bool Login(User user);
+        AuthResult Register(User user);
+        AuthResult Login(User user);
+        bool EmailExists(User user);
     }
 }

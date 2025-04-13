@@ -9,37 +9,29 @@ namespace Core_Domain
 {
     public class User
     {
-        private int userId;
+       
         private string firstname;
         private string lastname;
         private DateTime dateofbirth;
         private string email;
         private string password;
 
-        
-       public string Firstname
+        [Required(ErrorMessage = "Voornaam is verplicht")]
+        public string Firstname
         {
             get { return firstname; }
 
-            set {
-                if (!string.IsNullOrEmpty(value))
+            set {  firstname = value;}
+        }
 
-                    firstname = value;
-                else throw new ArgumentException("Firstname cannot be empty");
-
-                 }
-        } 
+        [Required(ErrorMessage = "Achternaam is verplicht")]
         public string Lastname
         {
             get { return lastname; }
 
-            set { 
-                if(!string.IsNullOrEmpty(value)) 
-                    
-                        lastname = value;
-                else throw new ArgumentException("Lastname cannot be empty");
-            }
+            set {lastname = value;}
         }
+
         public DateTime DateOfBirth
         {
             get { return dateofbirth; }
@@ -53,37 +45,42 @@ namespace Core_Domain
             }
         }
 
-
+        [Required(ErrorMessage = "Email is verplicht")]
         public string Email
         {
-            get => email;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Email cannot be empty");
-                email = value;
-            }
+            get { return email; }
+            set { email = value;}
         }
 
-        //[Required(ErrorMessage = "Wachtwoord is verplicht")]
-        //[MinLength(6, ErrorMessage = "Wachtwoord moet minstens 6 tekens bevatten")]
+        [Required(ErrorMessage = "Wachtwoord is verplicht")]
+        [MinLength(6, ErrorMessage = "Wachtwoord moet minstens 6 tekens bevatten")]
         public string Password
         {
             get => password;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Wachtwoord is verplicht");
-                password = value;
+               password = value;
             }
         }
-
+        public User() { }
         public User (string email, string password)
         {
             Email=email;
             Password=password;
         } 
-        
-        
+        public User(string firstname, string lastname, DateTime dateofbirth, string email, string password)
+        {
+            Firstname = firstname;
+            Lastname = lastname;
+            DateOfBirth = dateofbirth;
+            Email = email;
+            Password = password;
+        }
+
+        public string GetName(string name)
+
+        { 
+            return firstname;
+        }
     }
 }

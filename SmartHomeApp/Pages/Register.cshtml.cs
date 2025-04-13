@@ -1,4 +1,4 @@
-using Core_Domain;
+﻿using Core_Domain;
 using Core_Domain.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -26,10 +26,19 @@ namespace SmartHomeApp.Pages
                 return Page();
             }
             try
-            {
-                 _userservice.Register(newuser);
-                return RedirectToPage("/Index");
+            { 
 
+                 var result=   _userservice.Register(newuser);
+
+                if (!result.Success)
+                {
+                    ModelState.AddModelError(string.Empty, result.Message); 
+                    return Page();
+                }
+
+                TempData["SuccessMessage"] = result.Message;
+                return RedirectToPage("/Index");
+                
             }
             catch (Exception ex)
             {
