@@ -11,5 +11,8 @@ namespace Core_Domain.Interface
         AuthResult Register(User user);
         AuthResult Login(User user);
         bool EmailExists(User user);
+
+        
     }
+
 }

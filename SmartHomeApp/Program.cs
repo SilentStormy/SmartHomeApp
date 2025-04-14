@@ -12,6 +12,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IUserservice,UserService>();
 builder.Services.AddScoped<IUserRepository,UserRepository>(); 
+builder.Services.AddScoped<IDeviceRepository,DeviceRpository>(); 
+builder.Services.AddScoped<IDeviceService,DeviceService>(); 
 
 
 var app = builder.Build();

@@ -42,7 +42,7 @@ namespace SmartHomeApp.Pages
                
                var result= _userservice.Login(user);
                 TempData["SuccessMessage"]=result.Message;
-                return RedirectToPage("/Index");
+                return RedirectToPage("/DeviceDashboard");
             }
             catch (Exception ex)
             {

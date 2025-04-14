@@ -23,7 +23,7 @@ namespace Core_Domain
             set { devicename = value; }
 
         }
-        public Device
+        //public Device
     }
 }
 
