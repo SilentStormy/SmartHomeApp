@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Data.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,10 @@ namespace Infrastructure.Data.Interfaces
         bool DeviceCodeExists(string deviceCode);
         bool DeviceNameExists(string deviceName);   
         List<DeviceDTO> GetAllDevices();
-
-        void RemoveDevice(string deviceName);
-        
+        string GetDeviceSatus(int deviceId);
+        void RemoveDevice(int deviceId);
+        void TurnOnDevice(int deviceId); 
+        void TurnOffDevice(int deviceId);
+        void AssignDeviceToLocation(int deviceId, int locationId);
     }
 }

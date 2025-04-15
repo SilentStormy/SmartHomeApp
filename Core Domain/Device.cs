@@ -9,9 +9,16 @@ namespace Core_Domain
 {
     public class Device
     {
+        private int deviceId;
         private string devicecode;
         private string devicename;
+        private string devicestatus;
 
+        public int DeviceId
+        {
+            get { return deviceId; }
+            set { deviceId = value; }
+        }
         public string DeviceCode
         {
             get { return devicecode; }
@@ -23,7 +30,11 @@ namespace Core_Domain
             set { devicename = value; }
 
         }
-        //public Device
+        public string DeviceStatus
+        {
+            get { return devicestatus; }
+            set { devicestatus = value; }
+        }
     }
 }
 

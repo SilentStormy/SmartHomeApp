@@ -1,8 +1,8 @@
 
 using Infrastructure.Data;
-using Core_Domain;
 using Core_Domain.Interface;
 using Infrastructure.Data.Interfaces;
+using Core_Domain.Service;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<IUserservice,UserService>();
+builder.Services.AddScoped<IUserserivce,UserService>();
 builder.Services.AddScoped<IUserRepository,UserRepository>(); 
 builder.Services.AddScoped<IDeviceRepository,DeviceRpository>(); 
 builder.Services.AddScoped<IDeviceService,DeviceService>(); 

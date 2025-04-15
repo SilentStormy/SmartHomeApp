@@ -1,4 +1,5 @@
 ﻿using Core_Domain.Interface;
+using Core_Domain.Result;
 using Infrastructure.Data.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core_Domain
+namespace Core_Domain.Service
 {
-    public class DeviceService:IDeviceService
+    public class DeviceService : IDeviceService
     {
         private readonly string _connectionstring;
 
@@ -35,7 +36,7 @@ namespace Core_Domain
             return DeviceResult.SuccessResult(true, "The new device is now added successfuly!");
         }
 
-        
+
         public List<Device> GetAlldevices()
         {
             List<Device> devices = new();
@@ -43,6 +44,7 @@ namespace Core_Domain
             {
                 devices.Add(new Device
                 {
+                    DeviceId=devicedto.DeviceId,
                     DeviceCode = devicedto.DeviceCode,
                     DeviceName = devicedto.DeviceName,
                 }
@@ -54,8 +56,30 @@ namespace Core_Domain
 
         public DeviceResult RemoveDevice(Device device)
         {
-            _devicerepository.RemoveDevice(device.DeviceName);
+            _devicerepository.RemoveDevice(device.DeviceId);
             return DeviceResult.SuccessResult(true, "This device has been successfully removed");
+        }
+
+        public AuthResult TurnOn(Device device)
+        {
+            var currentstatus = _devicerepository.GetDeviceSatus(device.DeviceId);
+           if(currentstatus == "ON")
+            {
+                return AuthResult.FailedResult(false, "This device is akready ON");
+            }
+            _devicerepository.TurnOnDevice(device.DeviceId);
+            return AuthResult.SuccessResult(true, "This device is now On");
+        }   
+        
+        public AuthResult TurnOff(Device device)
+        {
+            var currentstatus = _devicerepository.GetDeviceSatus(device.DeviceId);
+           if(currentstatus == "OFF")
+            {
+                return AuthResult.FailedResult(false, "This device is akready OFF");
+            }
+            _devicerepository.TurnOnDevice(device.DeviceId);
+            return AuthResult.SuccessResult(true, "This device is now Off");
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core_Domain
+namespace Core_Domain.Result
 {
     public class AuthResult
     {
@@ -19,9 +19,9 @@ namespace Core_Domain
                 Success = true,
                 Message = message
             };
-            
-        }  
-        
+
+        }
+
         public static AuthResult FailedResult(bool success, string message)
 
         {
@@ -30,7 +30,7 @@ namespace Core_Domain
                 Success = false,
                 Message = message
             };
-            
+
         }
 
     }

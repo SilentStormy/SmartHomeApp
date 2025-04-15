@@ -1,4 +1,7 @@
-﻿using Infrastructure.Data.Interfaces;
+﻿
+
+using Infrastructure.Data.DTO;
+using Infrastructure.Data.Interfaces;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -63,20 +66,60 @@ namespace Infrastructure.Data
             using SqliteDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                devices.Add(new DeviceDTO() { DeviceName = reader["DeviceName"].ToString() });
+                devices.Add(new DeviceDTO
+                {
+                    DeviceId = Convert.ToInt32(reader["DeviceId"]),
+                    DeviceCode = reader["DeviceCode"].ToString(),
+                    DeviceName = reader["DeviceName"].ToString()
+                });
             }
             return devices;
 
         }
 
-        public void RemoveDevice(string deviceName)
+        public string GetDeviceSatus(int deviceId)
+        {
+            using SqliteConnection connection = new(_connectionstring);
+            connection.Open();
+            using SqliteCommand cmd = connection.CreateCommand();
+            cmd.CommandText = "SELECT DeviceStatus FROM Device WHERE DeviceId=@DeviceId";
+            cmd.Parameters.AddWithValue("@DeviceId", deviceId);
+            var result = cmd.ExecuteScalar();
+            return result.ToString();
+                
+                
+        }
+
+        public void RemoveDevice(int deviceId)
         {
             using SqliteConnection connection= new(_connectionstring);
             connection.Open();
             using SqliteCommand command = connection.CreateCommand();
-            command.CommandText = "DELETE * FROM Device WHERE DeviceName=@DeviceName";
-            command.Parameters.AddWithValue("@DeviceName", deviceName);
+            command.CommandText = "DELETE FROM Device WHERE DeviceId=@DeviceId";
+            command.Parameters.AddWithValue("@DeviceId", deviceId);
             command.ExecuteNonQuery();
         }
+
+        public void TurnOnDevice(int deviceId)
+        {
+           using SqliteConnection con = new(_connectionstring);
+            con.Open();
+            using SqliteCommand cmd= con.CreateCommand();
+            cmd.CommandText = "UPDATE Device SET DeviceStatus ='ON' WHERE DeviceId= @DeviceId";
+            cmd.Parameters.AddWithValue("@DeviceId",deviceId);
+            cmd.ExecuteNonQuery();
+        }
+
+        public void TurnOffDevice(int deviceId)
+        {
+            using SqliteConnection con = new(_connectionstring);
+            con.Open();
+            using SqliteCommand cmd = con.CreateCommand();
+            cmd.CommandText = "UPDATE Device SET DeviceStatus ='OFF' WHERE DeviceId= @DeviceId";
+            cmd.Parameters.AddWithValue("@DeviceId", deviceId);
+            cmd.ExecuteNonQuery();
+        }
+
+
     }
 }

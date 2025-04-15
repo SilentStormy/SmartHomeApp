@@ -7,9 +7,9 @@ namespace SmartHomeApp.Pages
 {
     public class RegisterModel : PageModel
     {
-        private readonly IUserservice _userservice;
+        private readonly IUserserivce _userservice;
 
-        public RegisterModel(IUserservice userservice)
+        public RegisterModel(IUserserivce userservice)
         {
             _userservice = userservice;
         }

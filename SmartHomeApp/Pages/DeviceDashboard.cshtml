@@ -28,7 +28,7 @@
         </div>
     }
 
-    <form method="post" class="p-4 border rounded shadow-sm" style="max-width: 500px; margin: auto;">
+    <form method="post" asp-page-handler="Add" class="p-4 border rounded shadow-sm" style="max-width: 500px; margin: auto;">
         <div class="form-group mb-3">
             <label asp-for="newdevice.DeviceCode" class="form-label">Apparaatcode</label>
             <input asp-for="newdevice.DeviceCode" class="form-control" placeholder="Bijv. ABC123" />
@@ -44,7 +44,6 @@
         <button type="submit" class="btn btn-primary w-100">Toevoegen</button>
     </form>
 
-  
     <div class="mt-5">
         <h4 class="text-center mb-3">Toegevoegde apparaten</h4>
 
@@ -53,16 +52,21 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                       @*  <th>Apparaatcode</th> *@
                         <th>Naam apparaat</th>
+                        <th style="width: 150px;">Actie</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var device in Model.Alldevices)
                     {
                         <tr>
-                           @*  <td>@device.DeviceCode</td> *@
                             <td>@device.DeviceName</td>
+                            <td>
+                                <form method="post" asp-page-handler="Remove">
+                                    <input type="hidden" name="deviceid" value="@device.DeviceId" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Verwijderen</button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

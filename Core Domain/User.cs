@@ -15,6 +15,7 @@ namespace Core_Domain
         private DateTime dateofbirth;
         private string email;
         private string password;
+        private string role;
 
         [Required(ErrorMessage = "Voornaam is verplicht")]
         public string Firstname
@@ -61,6 +62,13 @@ namespace Core_Domain
             {
                password = value;
             }
+        }
+
+        public string Role
+        {
+            get { return role; }
+            set { role = value; } 
+        
         }
         public User() { }
         public User (string email, string password)
