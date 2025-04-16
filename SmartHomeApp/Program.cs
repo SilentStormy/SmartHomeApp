@@ -13,8 +13,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUserserivce,UserService>();
 builder.Services.AddScoped<IUserRepository,UserRepository>(); 
 builder.Services.AddScoped<IDeviceRepository,DeviceRpository>(); 
-builder.Services.AddScoped<IDeviceService,DeviceService>(); 
-
+builder.Services.AddScoped<IDeviceService,DeviceService>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 
 var app = builder.Build();
 

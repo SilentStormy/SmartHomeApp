@@ -17,6 +17,6 @@ namespace Infrastructure.Data.Interfaces
         void RemoveDevice(int deviceId);
         void TurnOnDevice(int deviceId); 
         void TurnOffDevice(int deviceId);
-        void AssignDeviceToLocation(int deviceId, int locationId);
+        void SetDeviceLocation(int deviceId, int locationId);
     }
 }

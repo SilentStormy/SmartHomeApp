@@ -45,6 +45,15 @@
             <input asp-for="newuser.Password" class="form-control" type="password" placeholder="Maak een wachtwoord aan" />
             <span asp-validation-for="newuser.Password" class="text-danger"></span>
         </div>
+        <div class="form-group mb-3">
+            <label asp-for="newuser.Role" class="form-label">Kies een rol</label>
+            <select asp-for="newuser.Role" class="form-control">
+                <option value="">-- Selecteer een rol --</option>
+                <option value="Owner">Eigenaar</option>
+                <option value="Guest">Gast</option>
+            </select>
+            <span asp-validation-for="newuser.Role" class="text-danger"></span>
+        </div>
 
         <div class="d-grid">
             <button type="submit" class="btn btn-primary btn-block">Registreer</button>

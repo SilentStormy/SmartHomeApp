@@ -11,6 +11,6 @@ namespace Infrastructure.Data.DTO
         public int DeviceId { get; set; }
         public string DeviceCode { get; set; }
         public string DeviceName { get; set; }
-        public string DeviceStatus { get; set; }
+        public string? DeviceStatus { get; set; }
     }
 }

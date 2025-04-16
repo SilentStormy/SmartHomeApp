@@ -30,11 +30,18 @@ namespace Core_Domain
             set { devicename = value; }
 
         }
-        public string DeviceStatus
+        public string? DeviceStatus
         {
             get { return devicestatus; }
             set { devicestatus = value; }
         }
+
+        public Device(string devicename, string devicecode)
+        { 
+            DeviceName = devicename;
+            DeviceCode = devicecode;
+        }
+        public Device() { }
     }
 }
 

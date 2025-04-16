@@ -30,15 +30,15 @@
 
     <form method="post" asp-page-handler="Add" class="p-4 border rounded shadow-sm" style="max-width: 500px; margin: auto;">
         <div class="form-group mb-3">
-            <label asp-for="newdevice.DeviceCode" class="form-label">Apparaatcode</label>
-            <input asp-for="newdevice.DeviceCode" class="form-control" placeholder="Bijv. ABC123" />
-            <span asp-validation-for="newdevice.DeviceCode" class="text-danger"></span>
+            <label asp-for="DeviceCode" class="form-label">Apparaatcode</label>
+            <input asp-for="DeviceCode" class="form-control" placeholder="Bijv. ABC123" />
+            <span asp-validation-for="DeviceCode" class="text-danger"></span>
         </div>
 
         <div class="form-group mb-3">
-            <label asp-for="newdevice.DeviceName" class="form-label">Naam apparaat</label>
-            <input asp-for="newdevice.DeviceName" class="form-control" placeholder="Bijv. Lamp woonkamer" />
-            <span asp-validation-for="newdevice.DeviceName" class="text-danger"></span>
+            <label asp-for="DeviceName" class="form-label">Naam apparaat</label>
+            <input asp-for="DeviceName" class="form-control" placeholder="Bijv. Lamp woonkamer" />
+            <span asp-validation-for="DeviceName" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary w-100">Toevoegen</button>
@@ -62,9 +62,32 @@
                         <tr>
                             <td>@device.DeviceName</td>
                             <td>
-                                <form method="post" asp-page-handler="Remove">
+                                <form method="post" asp-page-handler="RemoveDevice">
                                     <input type="hidden" name="deviceid" value="@device.DeviceId" />
                                     <button type="submit" class="btn btn-sm btn-danger">Verwijderen</button>
+                                </form>
+                                <form method="post" asp-page-handler="SetLocation" style="margin-top: 5px;">
+                                    <div class="form-group">
+                                        <select name="locationid" class="form-control form-select mb-2">
+                                            <option value="">-- Kies locatie --</option>
+                                            @foreach (var loc in Model.AllLocations)
+                                            {
+                                                <option value="@loc.LocationId">@loc.LocationName</option>
+                                            }
+                                        </select>
+                                        <input type="hidden" name="deviceid" value="@device.DeviceId" />
+                                        <button type="submit" class="btn btn-sm btn-info w-100">Locatie instellen</button>
+                                    </div>
+                                </form>
+
+                                <form method="post" asp-page-handler="TurnOnDevice">
+                                    <input type="hidden" name="deviceid" value="@device.DeviceId" />
+                                    <button type="submit" class="btn btn-sm btn-success">Aan</button>
+                                </form>
+
+                                <form method="post" asp-page-handler="TurnOffDevice">
+                                    <input type="hidden" name="deviceid" value="@device.DeviceId" />
+                                    <button type="submit" class="btn btn-sm btn-secondary">Uit</button>
                                 </form>
                             </td>
                         </tr>

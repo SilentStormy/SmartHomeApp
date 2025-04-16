@@ -23,7 +23,7 @@ namespace Infrastructure.Data
         }
         public void AddNewDevice(string deviceCode, string deviceName)
         {
-           
+
             using SqliteConnection con = new(_connectionstring);
             con.Open();
             using SqliteCommand cmd = con.CreateCommand();
@@ -31,7 +31,7 @@ namespace Infrastructure.Data
             cmd.Parameters.AddWithValue("@DeviceCode", deviceCode);
             cmd.Parameters.AddWithValue("@DeviceName", deviceName);
             cmd.ExecuteNonQuery();
-
+        
     }
 
         public bool DeviceCodeExists(string deviceCode)
@@ -120,6 +120,16 @@ namespace Infrastructure.Data
             cmd.ExecuteNonQuery();
         }
 
+        public void SetDeviceLocation(int deviceId, int locationId)
+        {
+            using SqliteConnection conn= new(_connectionstring);
+            conn.Open();
+            using SqliteCommand cmd=conn.CreateCommand();
+            cmd.CommandText = "UPDATE Device SET LocationId=@LocationId WHERE DeviceId=@DeviceId";
+            cmd.Parameters.AddWithValue("@LocationId", locationId);
+            cmd.Parameters.AddWithValue("@DeviceId", deviceId);
+            cmd.ExecuteNonQuery();
 
+        }
     }
 }

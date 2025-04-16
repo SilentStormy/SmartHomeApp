@@ -60,26 +60,32 @@ namespace Core_Domain.Service
             return DeviceResult.SuccessResult(true, "This device has been successfully removed");
         }
 
-        public AuthResult TurnOn(Device device)
+        public DeviceResult TurnOn(Device device)
         {
             var currentstatus = _devicerepository.GetDeviceSatus(device.DeviceId);
            if(currentstatus == "ON")
             {
-                return AuthResult.FailedResult(false, "This device is akready ON");
+                return DeviceResult.FailedResult(false, "This device is akready ON");
             }
             _devicerepository.TurnOnDevice(device.DeviceId);
-            return AuthResult.SuccessResult(true, "This device is now On");
+            return DeviceResult.SuccessResult(true, "This device is now On");
         }   
         
-        public AuthResult TurnOff(Device device)
+        public DeviceResult TurnOff(Device device)
         {
             var currentstatus = _devicerepository.GetDeviceSatus(device.DeviceId);
            if(currentstatus == "OFF")
             {
-                return AuthResult.FailedResult(false, "This device is akready OFF");
+                return DeviceResult.FailedResult(false, "This device is akready OFF");
             }
-            _devicerepository.TurnOnDevice(device.DeviceId);
-            return AuthResult.SuccessResult(true, "This device is now Off");
+            _devicerepository.TurnOffDevice(device.DeviceId);
+            return  DeviceResult.SuccessResult(true, "This device is now Off");
+        }
+
+        public DeviceResult SetDeviceToLocation(Device device, Location location)
+        {
+            _devicerepository.SetDeviceLocation(device.DeviceId,location.LocationId);
+            return DeviceResult.SuccessResult(true,"This device has been added successfully!");
         }
     }
 }

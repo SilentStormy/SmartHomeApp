@@ -1,4 +1,5 @@
 ﻿using Core_Domain.Result;
+using Infrastructure.Data.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,11 @@ namespace Core_Domain.Interface
         DeviceResult AddNewDevice(Device device);
         DeviceResult RemoveDevice(Device device);
         List<Device> GetAlldevices();
-        AuthResult TurnOn(Device device);
-        AuthResult TurnOff(Device device);
+        DeviceResult TurnOn(Device device);
+        DeviceResult TurnOff(Device device);
+
+        DeviceResult SetDeviceToLocation(Device device,Location location);
+
+
     }
 }
