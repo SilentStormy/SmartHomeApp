@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Core_Domain.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core_Domain
+namespace Core_Domain.Entities
 {
-    public class Owner:User
+    public class Guest : User
     {
+
     }
 }

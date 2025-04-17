@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core_Domain
+namespace Core_Domain.Entities
 {
     public class Location
     {
@@ -14,8 +14,8 @@ namespace Core_Domain
         {
             get { return locationId; }
             set { locationId = value; }
-        }  
-        
+        }
+
         public string LocationName
         {
             get { return locationName; }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core_Domain
+namespace Core_Domain.Entities
 {
     public class Device
     {
@@ -37,7 +37,7 @@ namespace Core_Domain
         }
 
         public Device(string devicename, string devicecode)
-        { 
+        {
             DeviceName = devicename;
             DeviceCode = devicecode;
         }

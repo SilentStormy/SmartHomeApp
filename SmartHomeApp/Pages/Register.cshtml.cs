@@ -1,4 +1,4 @@
-﻿using Core_Domain;
+﻿using Core_Domain.Entities;
 using Core_Domain.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -29,7 +29,7 @@ namespace SmartHomeApp.Pages
             { 
 
                  var result=   _userservice.Register(newuser);
-
+                    
                 if (!result.Success)
                 {
                     ModelState.AddModelError(string.Empty, result.Message); 

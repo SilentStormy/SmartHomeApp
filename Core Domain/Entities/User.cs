@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core_Domain
+namespace Core_Domain.Entities
 {
     public class User
     {
-       
+
         private string firstname;
         private string lastname;
         private DateTime dateofbirth;
@@ -22,7 +22,7 @@ namespace Core_Domain
         {
             get { return firstname; }
 
-            set {  firstname = value;}
+            set { firstname = value; }
         }
 
         [Required(ErrorMessage = "Achternaam is verplicht")]
@@ -30,14 +30,15 @@ namespace Core_Domain
         {
             get { return lastname; }
 
-            set {lastname = value;}
+            set { lastname = value; }
         }
 
         public DateTime DateOfBirth
         {
             get { return dateofbirth; }
 
-            set {
+            set
+            {
 
                 if (value > DateTime.Now)
                     throw new ArgumentException("Date of birth cannot be in the future");
@@ -50,7 +51,7 @@ namespace Core_Domain
         public string Email
         {
             get { return email; }
-            set { email = value;}
+            set { email = value; }
         }
 
         [Required(ErrorMessage = "Wachtwoord is verplicht")]
@@ -60,22 +61,22 @@ namespace Core_Domain
             get => password;
             set
             {
-               password = value;
+                password = value;
             }
         }
 
         public string Role
         {
             get { return role; }
-            set { role = value; } 
-        
+            set { role = value; }
+
         }
         public User() { }
-        public User (string email, string password)
+        public User(string email, string password)
         {
-            Email=email;
-            Password=password;
-        } 
+            Email = email;
+            Password = password;
+        }
         public User(string firstname, string lastname, DateTime dateofbirth, string email, string password)
         {
             Firstname = firstname;
@@ -87,7 +88,7 @@ namespace Core_Domain
 
         public string GetName(string name)
 
-        { 
+        {
             return firstname;
         }
     }

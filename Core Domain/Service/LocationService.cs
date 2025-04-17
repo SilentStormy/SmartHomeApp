@@ -1,4 +1,5 @@
-﻿using Core_Domain.Interface;
+﻿using Core_Domain.Entities;
+using Core_Domain.Interface;
 using Infrastructure.Data.DTO;
 using Infrastructure.Data.Interfaces;
 using Microsoft.Extensions.Configuration;

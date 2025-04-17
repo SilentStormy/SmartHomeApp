@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core_Domain
+namespace Core_Domain.Entities
 {
     public class Lightening : Device
     {
@@ -15,7 +15,7 @@ namespace Core_Domain
         {
             get { return brightness; }
             set { brightness = value; }
-        } 
+        }
         public int Colortemperature
         {
             get { return colortemperature; }

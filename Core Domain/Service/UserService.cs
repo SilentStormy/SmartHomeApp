@@ -1,4 +1,5 @@
-﻿using Core_Domain.Interface;
+﻿using Core_Domain.Entities;
+using Core_Domain.Interface;
 using Core_Domain.Result;
 using Infrastructure.Data;
 using Infrastructure.Data.Interfaces;
@@ -15,11 +16,13 @@ namespace Core_Domain.Service
     {
         private readonly string _connectionstring;
         private readonly IUserRepository _userRepository;
+        private readonly IRegistrationConfirmation _registrationConfirmation;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IRegistrationConfirmation registrationConfirmation)
         {
 
             _userRepository = userRepository;
+            _registrationConfirmation = registrationConfirmation;
         }
 
         public AuthResult Register(User user)
@@ -37,6 +40,7 @@ namespace Core_Domain.Service
                  user.Password,
                  user.Role);
 
+            _registrationConfirmation.Send(user);
             return AuthResult.SuccessResult(true, "Jij bent succevol geregistreerd!");
 
 
