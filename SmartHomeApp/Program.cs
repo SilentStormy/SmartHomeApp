@@ -12,10 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<IUserserivce,UserService>();
+builder.Services.AddScoped<IUserAuthService,UserService>();
 builder.Services.AddScoped<IUserRepository,UserRepository>(); 
 builder.Services.AddScoped<IDeviceRepository,DeviceRpository>(); 
-builder.Services.AddScoped<IDeviceService,DeviceService>();
+builder.Services.AddScoped<IDeviceLocator,DeviceService>();
+builder.Services.AddScoped<IDevicemanagement,DeviceService>();
+builder.Services.AddScoped<IDeviceRemote,DeviceService>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddTransient<IRegistrationConfirmation, EmailConfirmation>();

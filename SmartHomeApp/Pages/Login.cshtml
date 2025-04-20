@@ -4,40 +4,29 @@
     ViewData["Title"] = "Log in";
 }
 
-<div class="container mt-5">
-    <div class="text-center mb-4">
-        <h2>Inloggen</h2>
-    </div>
+<div style="min-height: 100vh; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background-color: #fff; padding: 40px; border-radius: 12px; width: 100%; max-width: 420px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align: center; color: #5e2b97; margin-bottom: 25px;">Welcome Back</h2>
 
-    <form method="post" class="mx-auto" style="max-width: 400px;">
+        <form method="post">
+            <div style="margin-bottom: 16px;">
+                <input asp-for="email" class="form-control" placeholder="Email address" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ccc;" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
 
-    
+            <div style="margin-bottom: 24px;">
+                <input asp-for="password" type="password" class="form-control" placeholder="Password" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ccc;" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
 
-        <div class="form-group mb-3">
-            <label asp-for="email" class="form-label">E-mail</label>
-            <input asp-for="email" class="form-control" placeholder="Voer je e-mailadres in" />
-            <span asp-validation-for="email" class="text-danger"></span>
-        </div>
-
-        <div class="form-group mb-3">
-            <label asp-for="password" class="form-label">Wachtwoord</label>
-            <input asp-for="password" class="form-control" placeholder="Voer je wachtwoord in" type="password" />
-            <span asp-validation-for="password" class="text-danger"></span>
-        </div>
-
-
-        <div class="d-grid">
-            <button type="submit" class="btn btn-warning btn-lg">
-                <i class="fas fa-lock"></i> Inloggen
+            <button type="submit" style="width: 100%; padding: 12px; background-color: #5e2b97; color: white; border: none; border-radius: 6px; font-weight: bold; transition: 0.3s;">
+                Log In
             </button>
-        </div>
 
-        <div class="text-center mt-4">
-            <p>
-                Heb je nog geen account?
-                <a href="/Authentication/Register" class="text-decoration-none text-warning">Registreer hier</a>.
+            <p style="text-align: center; margin-top: 20px;">
+                Don't have an account?
+                <a href="/Register" style="color: #5e2b97; text-decoration: none; font-weight: bold;">Sign up here</a>
             </p>
-        </div>
-
-    </form>
+        </form>
+    </div>
 </div>

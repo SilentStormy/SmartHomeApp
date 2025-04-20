@@ -1,5 +1,6 @@
 ﻿using Core_Domain.Entities;
 using Core_Domain.Interface;
+using Core_Domain.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,11 +8,11 @@ namespace SmartHomeApp.Pages
 {
     public class RegisterModel : PageModel
     {
-        private readonly IUserserivce _userservice;
+        private readonly IUserAuthService _userauthentication;
 
-        public RegisterModel(IUserserivce userservice)
+        public RegisterModel(IUserAuthService userservice)
         {
-            _userservice = userservice;
+            _userauthentication = userservice;
         }
         [BindProperty]
 
@@ -26,9 +27,9 @@ namespace SmartHomeApp.Pages
                 return Page();
             }
             try
-            { 
+            {
 
-                 var result=   _userservice.Register(newuser);
+                var result = _userauthentication.Register(newuser);
                     
                 if (!result.Success)
                 {

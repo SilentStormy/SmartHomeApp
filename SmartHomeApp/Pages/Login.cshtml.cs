@@ -10,9 +10,9 @@ namespace SmartHomeApp.Pages
     public class LoginModel : PageModel
     {
 
-        private readonly IUserserivce _userservice;
+        private readonly IUserAuthService _userservice;
 
-        public LoginModel(IUserserivce userservice)
+        public LoginModel(IUserAuthService userservice)
         {
             _userservice = userservice;
         }

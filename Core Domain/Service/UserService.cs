@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Core_Domain.Service
 {
-    public class UserService : IUserAuthentication
+    public class UserService : IUserAuthService
     {
         private readonly string _connectionstring;
         private readonly IUserRepository _userRepository;

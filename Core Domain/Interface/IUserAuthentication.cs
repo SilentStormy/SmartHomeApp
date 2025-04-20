@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core_Domain.Interface
 {
-    public interface IUserserivce
+    public interface IUserAuthService
     {
         AuthResult Register(User user);
         AuthResult Login(User user);

@@ -1,19 +1,30 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
+<div style="min-height: 100vh; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 40px;">
 
     @if (TempData["SuccessMessage"] != null)
     {
-        <div class="alert alert-success">
+        <div class="alert alert-success" style="max-width: 600px;">
             @TempData["SuccessMessage"]
         </div>
     }
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
+    <h1 style="font-size: 3rem; color: #5e2b97; margin-bottom: 20px;">Welcome to SmartHome</h1>
 
+    <p style="font-size: 1.2rem; color: #444; max-width: 600px;">
+        Controleer je slimme apparaten, beheer je kamers en ontvang meldingen in realtime – allemaal op één plek.
+    </p>
+
+    <div class="mt-4" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+        <a href="/Register" class="btn btn-primary" style="padding: 12px 24px; background-color: #5e2b97; border: none; border-radius: 6px;">Start Now</a>
+        <a href="/Login" class="btn btn-outline-dark" style="padding: 12px 24px; border-radius: 6px;">Login</a>
+    </div>
+
+    <div style="margin-top: 40px;">
+        <img src="" alt="SmartHome illustration" style="max-width: 400px; width: 100%;" />
+    </div>
 </div>
