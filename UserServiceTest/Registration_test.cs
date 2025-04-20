@@ -28,8 +28,8 @@ namespace UserServiceTest
             MockUserRepository.Setup(u=>u.EmailExists(user.Email)).Returns(false);
 
             var userservice=new UserService(MockUserRepository.Object);
-
-            var reuslt = userserice.Register(user);
+            
+            var reuslt = userservice.Register(user);
 
             Assert.True(reuslt.Success);
             Assert.Contains("geregistreerd", reuslt.Message);

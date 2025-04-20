@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Core_Domain.Service
 {
-    public class UserService : IUserserivce
+    public class UserService : IUserAuthentication
     {
         private readonly string _connectionstring;
         private readonly IUserRepository _userRepository;
@@ -69,5 +69,9 @@ namespace Core_Domain.Service
         //{
         //    _userRepository.RevokeAccess(guest.)
         //}
+    }
+
+    public interface IUserAuthentication
+    {
     }
 }

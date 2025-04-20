@@ -7,13 +7,18 @@ namespace SmartHomeApp.Pages
 {
     public class DeviceDashboardModel : PageModel
     {
-        private readonly IDeviceService _deviceService;
+        private readonly IDeviceLocator _devicelocator;
+        private readonly IDevicemanagement _devicemanagement;
+        private readonly IDeviceRemote _deviceremote;
+
         private readonly ILocationService _locationService; 
 
-        public DeviceDashboardModel(IDeviceService deviceService,ILocationService locationService)
+        public DeviceDashboardModel(IDeviceLocator deviceLocator,ILocationService locationService,IDeviceRemote deviceRemote,IDevicemanagement devicemanagement)
         {
-            _deviceService = deviceService;
+            _devicelocator = deviceLocator;
             _locationService = locationService;
+            _devicemanagement = devicemanagement;
+            _deviceremote=deviceRemote;
         }
        
 
@@ -35,7 +40,7 @@ namespace SmartHomeApp.Pages
         public List<Location> AllLocations { get; set; }    
          public void OnGet()
         {
-            Alldevices=_deviceService.GetAlldevices();
+            Alldevices=_devicemanagement.GetAlldevices();
             AllLocations=_locationService.GetAllLocations();
         }
 
@@ -43,7 +48,7 @@ namespace SmartHomeApp.Pages
         {
             if(!ModelState.IsValid)
             {
-                Alldevices = _deviceService.GetAlldevices();
+                Alldevices = _devicemanagement.GetAlldevices();
                 return Page();
             }
 
@@ -53,16 +58,16 @@ namespace SmartHomeApp.Pages
                 {
                     DeviceStatus = "OFF"
                 };
-                    var result = _deviceService.AddNewDevice(newdevice);
+                    var result = _devicemanagement.AddNewDevice(newdevice);
 
                     if (!result.Success)
                     {
                         ModelState.AddModelError(string.Empty, result.Message);
-                    Alldevices = _deviceService.GetAlldevices();
+                    Alldevices = _devicemanagement.GetAlldevices();
                     return Page();
                     }
                     TempData["SuccessMessage"] = result.Message;
-                Alldevices = _deviceService.GetAlldevices();
+                Alldevices = _devicemanagement.GetAlldevices();
 
                 return Page();
                 
@@ -70,7 +75,7 @@ namespace SmartHomeApp.Pages
             catch (Exception ex)
             {
                 ModelState.AddModelError(string.Empty, $"An error occurred: {ex.Message}");
-                Alldevices = _deviceService.GetAlldevices();
+                Alldevices = _devicemanagement.GetAlldevices();
                 return Page();
             }
         }
@@ -78,11 +83,11 @@ namespace SmartHomeApp.Pages
         public async Task<IActionResult> OnPostRemoveDeviceAsync(int deviceid)
         {
            selecteddevice = new Device { DeviceId = deviceid };
-            var result = _deviceService.RemoveDevice(selecteddevice);
+            var result = _devicemanagement.RemoveDevice(selecteddevice);
             if (!result.Success)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                Alldevices = _deviceService.GetAlldevices();
+                Alldevices = _devicemanagement.GetAlldevices();
                 return Page();
             }
 
@@ -93,11 +98,11 @@ namespace SmartHomeApp.Pages
         public async Task<IActionResult> OnPostTurnOnDeviceAsync(int deviceid)
         {
             selecteddevice = new Device { DeviceId = deviceid };
-            var result = _deviceService.TurnOn(selecteddevice);
+            var result = _deviceremote.TurnOn(selecteddevice);
             if (!result.Success)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                Alldevices = _deviceService.GetAlldevices();
+                Alldevices = _devicemanagement.GetAlldevices();
                 return Page();
             }
 
@@ -108,11 +113,11 @@ namespace SmartHomeApp.Pages
         public async Task<IActionResult> OnPostTurnOffDeviceAsync(int deviceid)
         {
             selecteddevice = new Device { DeviceId = deviceid };
-            var result = _deviceService.TurnOff(selecteddevice);
+            var result = _deviceremote.TurnOff(selecteddevice);
             if (!result.Success)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                Alldevices = _deviceService.GetAlldevices();
+                Alldevices = _devicemanagement.GetAlldevices();
                 return Page();
             }
 
@@ -125,11 +130,11 @@ namespace SmartHomeApp.Pages
             selecteddevice = new Device { DeviceId = deviceid };
             selectedlocation = new Location { LocationId = locationid };
             
-            var result = _deviceService.SetDeviceToLocation(selecteddevice,selectedlocation);
+            var result = _devicelocator.SetDeviceToLocation(selecteddevice,selectedlocation);
             if (!result.Success)
             {
                 ModelState.AddModelError(string.Empty, result.Message);
-                Alldevices = _deviceService.GetAlldevices();
+                Alldevices = _devicemanagement.GetAlldevices();
                 return Page();
             }
 

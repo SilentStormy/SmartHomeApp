@@ -9,13 +9,20 @@ namespace Core_Domain.Entities
 {
     public class User
     {
-
+        private int userId;
         private string firstname;
         private string lastname;
         private DateTime dateofbirth;
         private string email;
         private string password;
         private string role;
+
+        public int UserId
+        {
+            get { return userId; }
+            set { userId = value; }
+        }
+
 
         [Required(ErrorMessage = "Voornaam is verplicht")]
         public string Firstname

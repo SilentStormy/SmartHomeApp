@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Core_Domain.Service
 {
-    public class DeviceService : IDeviceService
+    public class DeviceService : IDevicemanagement,IDeviceRemote,IDeviceLocator
     {
         private readonly string _connectionstring;
 
